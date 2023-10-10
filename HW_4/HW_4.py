@@ -11,6 +11,9 @@ number = 27500275620570000
 noll_in_end = len(str(number)) - len(str(number).rstrip('0'))
 print(noll_in_end)
 
+#решение учителя
+#noll_in_end = len(str(number)) - len(str(number).strip('0'))
+
 # 3. Дана строка в которой есть числа (разделяются пробелами).
 # Например "43 больше чем 34 но меньше чем 56". Найти сумму ВСЕХ ЧИСЕЛ (А НЕ ЦИФР) в этой строке.
 # Для данного примера ответ - 133. (используйте split и проверку isdigit)
@@ -22,6 +25,18 @@ for symbol in my_str.split(' '):
     if symbol.isdigit():
         sum_digits += int(symbol)
 print(sum_digits)
+
+
+#решение учителя
+numb_list = []
+for word in my_str.split():
+    if word.isdigit():
+        numb_list.append(int(word))
+result = sum(numb_list)
+print(result)
+# или одной строкой
+result = sum([int(word) for word in my_str.split() if word.isdigit()])
+print(result)
 
 # 4. Дана строка my_str в которой символы МОГУТ повторяться и два символа l_limit, r_limit,
 # которые точно находятся в этой строке. Причем l_limit левее чем r_limit.
@@ -37,6 +52,10 @@ r_index = my_str.rfind(r_limit)
 sub_str = my_str[l_index:r_index]
 print(sub_str)
 
+# решение учителя
+
+res_str = my_str[my_str.find(l_limit) + 1:my_str.rfind(r_limit)]
+print(res_str)
 
 # 5. Дан список строк my_list. Создать новый список в который поместить
 # элементы из my_list у которых первый символ - буква "a".
@@ -84,6 +103,13 @@ for symbol in my_str:
         my_list.append(symbol)
 print(my_list)
 
+# решение учителя
+
+for symbol in set(my_str):
+    if my_str.count(symbol) == 1:
+        my_list.append(symbol)
+print(my_list)
+
 # 9. Даны две строки. Создать список в который поместить те символы,
 # которые есть в обеих строках хотя бы раз.
 
@@ -95,6 +121,10 @@ my_str_2_set = set(my_str_2)
 
 intersection_list = list(my_str_1_set.intersection(my_str_2))
 print(intersection_list, type(intersection_list))
+
+# решение учителя
+res_list = list(set(my_str_1).intersection(set(my_str_2)))
+print(res_list)
 
 # 10. Даны две строки. Создать список в который поместить те символы, которые есть в
 # обеих строках,но в каждой ТОЛЬКО ПО ОДНОМУ разу.
@@ -111,6 +141,12 @@ for symbol in my_str_1:
             new_list.append(symbol)
 print(new_list)
 
+# решение учителя
+res_list = []
+for symbol in set(my_str_1).intersection(set(my_str_2)):
+    if my_str_1.count(symbol) == 1 and my_str_2.count(symbol) == 1:
+        res_list.append(symbol)
+print(res_list)
 
 # 11. Дана строка my_str. Разделите эту строку на пары из двух символов и поместите эти пары в список.
 # Если строка содержит нечетное количество символов, пропущенный второй символ последней пары должен
@@ -119,14 +155,28 @@ print(new_list)
 
 my_str = 'abcda'
 new_list = []
-n = 2
 
-for i in range(0, len(my_str), n):
-    symbol = my_str[i:i + n]
+for i in range(0, len(my_str), 2):
+    symbol = my_str[i:i + 2]
     if len(symbol) == 1:
         new_list.append(symbol + "_")
     else:
         new_list.append(symbol)
 
 print(new_list)
-# for my_str in range(0, len(my_str), 2):
+
+# решение учителя
+my_str = 'abcda'
+
+if len(my_str) % 2:
+    my_str += '_'
+res_list = []
+for index in range(0, len(my_str), 2):
+    res_list.append(my_str[index: index + 2])
+print(res_list)
+
+# в две строки
+
+my_str = my_str + '_' if len(my_str) % 2 else my_str
+res_list = [my_str[index: index + 2] for index in range(0, len(my_str), 2)]
+print(res_list)
